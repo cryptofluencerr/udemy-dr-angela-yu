@@ -11,8 +11,14 @@ let musicObj = {
 
 console.log(numberOfButtons);
 for (let i = 0; i < numberOfButtons; i++) {
-  document.querySelectorAll(".drum")[i].addEventListener("click", function () {
-    Audio(`${musicObj.this.innerHTML}`);
-    Audio.play();
+  document.querySelectorAll(".drum")[i].addEventListener("click", function (e) {
+    let audio = new Audio(`${musicObj[this.innerHTML]}`);
+    audio.play();
   });
+  document.addEventListener("keydown", function (e) {
+    let audio1 = new Audio(`${musicObj[e.key]}`);
+    audio1.play();
+    console.log(e.key);
+});
 }
+
