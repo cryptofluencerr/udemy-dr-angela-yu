@@ -1,4 +1,3 @@
-let numberOfButtons = document.querySelectorAll(".drum").length;
 let musicObj = {
   w: "sounds/crash.mp3",
   a: "sounds/kick-bass.mp3",
@@ -8,17 +7,22 @@ let musicObj = {
   k: "sounds/tom-3.mp3",
   l: "sounds/tom-4.mp3",
 };
-
-console.log(numberOfButtons);
-for (let i = 0; i < numberOfButtons; i++) {
-  document.querySelectorAll(".drum")[i].addEventListener("click", function (e) {
-    let audio = new Audio(`${musicObj[this.innerHTML]}`);
-    audio.play();
-  });
-  document.addEventListener("keydown", function (e) {
-    let audio1 = new Audio(`${musicObj[e.key]}`);
-    audio1.play();
-    console.log(e.key);
+$(".drum").click(function (val) {
+  let audio = new Audio(`${musicObj[this.innerHTML]}`);
+  audio.play();
+  $("." + this.innerHTML).addClass("pressed");
+  val = this.innerHTML;
+  setTimeout(function () {
+    $("." + val).removeClass("pressed");
+  }, 200);
 });
-}
 
+$(".drum").keydown(function (e) {
+  $("." + e.key).addClass("pressed");
+  setTimeout(function () {
+    $("." + e.key).removeClass("pressed");
+  }, 200);
+
+  let audio1 = new Audio(`${musicObj[e.key]}`);
+  audio1.play();
+});
