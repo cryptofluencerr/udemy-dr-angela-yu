@@ -1,3 +1,4 @@
-$("input").keydown(function (e) {
-  console.log(e.key);
+$(document).on("keydown", function (e) {
+  $("h1").text(e.key);
 });
+
