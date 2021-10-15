@@ -7,12 +7,12 @@ let musicObj = {
   k: "sounds/tom-3.mp3",
   l: "sounds/tom-4.mp3",
 };
-$(".drum").click(function (val) {
-  let audio = new Audio(`${musicObj[this.innerHTML]}`);
-  audio.play();
-  $("." + this.innerHTML).addClass("pressed");
+$(".drum").on("click", function (val) {
   val = this.innerHTML;
-  setTimeout(function () {
+  let audio = new Audio(musicObj[val]);
+  audio.play();
+  $("." + val).addClass("pressed");
+  setTimeout(function (e) {
     $("." + val).removeClass("pressed");
   }, 200);
 });

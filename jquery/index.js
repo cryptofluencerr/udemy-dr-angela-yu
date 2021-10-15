@@ -1,4 +1,10 @@
 $(document).on("keydown", function (e) {
-  $("h1").text(e.key);
+  $(".hello").text(e.key);
 });
 
+$("h1").prepend("<button>Hello</button>");
+
+// $("button").click(function (e) {
+//   e.preventDefault();
+//   $("h1").
+// });
