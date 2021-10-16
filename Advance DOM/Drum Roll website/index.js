@@ -12,12 +12,13 @@ $(".drum").on("click", function (val) {
   let audio = new Audio(musicObj[val]);
   audio.play();
   $("." + val).addClass("pressed");
-  setTimeout(function (e) {
+  setTimeout(function () {
     $("." + val).removeClass("pressed");
   }, 200);
 });
 
 $(".drum").keydown(function (e) {
+  console.log(e.key);
   $("." + e.key).addClass("pressed");
   setTimeout(function () {
     $("." + e.key).removeClass("pressed");
