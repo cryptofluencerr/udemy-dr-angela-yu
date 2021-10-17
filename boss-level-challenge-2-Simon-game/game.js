@@ -29,12 +29,24 @@ function checkAnswer(currentLevel) {
       }, 1000);
     }
   } else {
-    console.log("wrong");
+    $("body").addClass("game-over");
+    setTimeout(function () {
+      $("body").removeClass("game-over");
+    }, 200);
+    $("#level-title").text("Game Over, Press Any Key to Restart");
+    playSound("wrong");
+    startOver();
   }
 }
 
+function startOver() {
+  level = 0;
+  gamePattern = [];
+  started = false;
+}
+
 function nextSequence() {
-  userClickPattern=[];
+  userClickPattern = [];
   level++;
   $("#level-title").text("Level " + level);
   let randomNumber = Math.floor(Math.random() * 4);
