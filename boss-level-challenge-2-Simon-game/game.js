@@ -19,10 +19,7 @@ $("button").on("click", function (e) {
 });
 
 function checkAnswer(currentLevel) {
-  console.log(gamePattern);
-  console.log(userClickPattern);
   if (userClickPattern[currentLevel] === gamePattern[currentLevel]) {
-    console.log("Success");
     if (gamePattern.length === userClickPattern.length) {
       setTimeout(function () {
         nextSequence();
