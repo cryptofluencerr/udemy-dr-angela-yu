@@ -1,51 +1,59 @@
 let buttonColours = ["red", "blue", "green", "yellow"];
-let gamePattern = [];
-let usedClickPattern = [];
-let started = false;
-let level = 0;
+var gamePattern = [];
+var userClickPattern = [];
+var started = false;
+var level = 0;
 
 $(document).on("keydown", function () {
-  if (!started) {
+  if (level === 0) {
     nextSequence();
-    $("#level-title").text("Level " + level);
-    started = true;
   }
 });
 
-nextSequence = () => {
+$("button").on("click", function (e) {
+  userChosenColour = e.target.id;
+  userClickPattern.push(userChosenColour);
+  animatePress(userChosenColour);
+  playSound(userChosenColour);
+  checkAnswer(userClickPattern.length - 1);
+});
+
+function checkAnswer(currentLevel) {
+  console.log(gamePattern);
+  console.log(userClickPattern);
+  if (userClickPattern[currentLevel] === gamePattern[currentLevel]) {
+    console.log("Success");
+    if (gamePattern.length === userClickPattern.length) {
+      setTimeout(function () {
+        nextSequence();
+      }, 1000);
+    }
+  } else {
+    console.log("wrong");
+  }
+}
+
+function nextSequence() {
+  userClickPattern=[];
   level++;
+  $("#level-title").text("Level " + level);
   let randomNumber = Math.floor(Math.random() * 4);
-  randomChosenColour = buttonColours[randomNumber];
+  let randomChosenColour = buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
-  // console.log($.type(".row"));
-  $("button").on("click", function () {
-    let userChosenColour = this.id;
-    usedClickPattern.push(userChosenColour);
-    // console.log(usedClickPattern);
-  });
+
   $(`#${randomChosenColour}`).fadeOut(100).fadeIn(100);
   $(`#${randomChosenColour}`).on("click", () => {
-    let audio = new Audio("sounds/" + randomChosenColour + ".mp3");
-    audio.play();
+    playSound(randomChosenColour);
   });
-};
-playSound = (name) => {
-  $("button").on("click", (e) => {
-    let audio1 = new Audio("sounds/" + e.target.id + ".mp3");
-    audio1.play();
-  });
-};
+}
+function playSound(name) {
+  let audio = new Audio("sounds/" + name + ".mp3");
+  audio.play();
+}
 
-animatePress = () => {
-  $("button").click(function (e) {
-    e.preventDefault();
-    console.log(e.target.id);
-    $(`#${e.target.id}`).addClass("pressed");
-    setTimeout(function () {
-      $(`#${e.target.id}`).removeClass("pressed");
-    }, 50);
-  });
+animatePress = (currentColour) => {
+  $(`#${currentColour}`).addClass("pressed");
+  setTimeout(function () {
+    $(`#${currentColour}`).removeClass("pressed");
+  }, 100);
 };
-
-animatePress();
-playSound();
