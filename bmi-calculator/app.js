@@ -19,6 +19,7 @@ app.post("/bmicalculator", (req, res) => {
   } else {
     res.send("Your BMI is " + bmi + " and you are overweight.");
   }
+  console.log(req.body);
 });
 
 app.listen(3000, () => {
