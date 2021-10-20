@@ -4,94 +4,86 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <link
-      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
       rel="stylesheet"
       id="bootstrap-css"
     />
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <title>Document</title>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
   </head>
   <body>
-    <link
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-    />
-    <body>
-      <div class="container">
-        <div class="col-md-6 mx-auto text-center">
-          <div class="header-title">
-            <h1 class="wv-heading--title">Check out — it’s free!</h1>
-            <h2 class="wv-heading--subtitle">
-              Lorem ipsum dolor sit amet! Neque porro quisquam est qui do dolor
-              amet, adipisci velit...
-            </h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 mx-auto">
-            <div class="myform form">
-              <form action="" method="post" name="login">
-                <div class="form-group">
-                  <input
-                    type="text"
-                    name="name"
-                    class="form-control my-input"
-                    id="name"
-                    placeholder="Name"
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="email"
-                    name="email"
-                    class="form-control my-input"
-                    id="email"
-                    placeholder="Email"
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="number"
-                    min="0"
-                    name="phone"
-                    id="phone"
-                    class="form-control my-input"
-                    placeholder="Phone"
-                  />
-                </div>
-                <div class="text-center">
-                  <button
-                    type="submit"
-                    class="btn btn-block send-button tx-tfm"
-                  >
-                    Create Your Free Account
-                  </button>
-                </div>
-                <div class="col-md-12">
-                  <div class="login-or">
-                    <hr class="hr-or" />
-                    <span class="span-or">or</span>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <a class="btn btn-block g-button" href="#">
-                    <i class="fa fa-google"></i> Sign up with Google
-                  </a>
-                </div>
-                <p class="small mt-3">
-                  By signing up, you are indicating that you have read and agree
-                  to the
-                  <a href="#" class="ps-hero__content__link">Terms of Use</a>
-                  and <a href="#">Privacy Policy</a>.
-                </p>
-              </form>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
+          <legend>
+            <a href="http://www.jquery2dotnet.com"
+              ><i class="glyphicon glyphicon-globe"></i
+            ></a>
+            Sign up!
+          </legend>
+          <form action="/" method="post" class="form" role="form">
+            <div class="row">
+              <div class="col-xs-6 col-md-6">
+                <input
+                  class="form-control"
+                  name="firstName"
+                  placeholder="First Name"
+                  type="text"
+                />
+              </div>
+              <div class="col-xs-6 col-md-6">
+                <input
+                  class="form-control"
+                  name="lastName"
+                  placeholder="Last Name"
+                  type="text"
+                />
+              </div>
             </div>
-          </div>
+            <input
+              class="form-control"
+              name="yourEmail"
+              placeholder="Your Email"
+            />
+            <input
+              class="form-control"
+              name="reEnterEmail"
+              placeholder="Re-enter Email"
+            />
+            <input
+              class="form-control"
+              name="password"
+              placeholder="New Password"
+              type="password"
+            />
+            <label class="radio-inline">
+              <input
+                type="radio"
+                name="sex"
+                id="inlineCheckbox1"
+                value="male"
+              />
+              Male
+            </label>
+            <label class="radio-inline">
+              <input
+                type="radio"
+                name="sex"
+                id="inlineCheckbox2"
+                value="female"
+              />
+              Female
+            </label>
+            <br />
+            <br />
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+              Sign up
+            </button>
+          </form>
         </div>
       </div>
-    </body>
+    </div>
   </body>
 </html>

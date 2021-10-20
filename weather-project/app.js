@@ -1,4 +1,5 @@
 const express = require("express");
+
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +24,6 @@ app.post("/", (req, res) => {
     units;
   // getting api data
   https.get(url, (response) => {
-    console.log(response);
     // console.log(response.headers);
     // getting data from API
     response.on("data", (data) => {
@@ -33,7 +33,6 @@ app.post("/", (req, res) => {
       let tempMax = weather.main.temp_max;
       let desc = weather.weather[0].description;
       let image = `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`;
-      console.log(image);
       // res.write can also be used and at last res.send()
       res.send(`
       <p>The weather is currently ${desc} </p>
