@@ -9,6 +9,7 @@ const fruitSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   rating: {
     type: Number,
@@ -40,14 +41,24 @@ Fruit.find(function (err, fruits) {
     console.log(fruits.length);
   }
 });
-
-Fruit.deleteMany({ name: "Karan" }, function (err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Successfully deleted the document");
-  }
-});
+// _ids = [
+//   "617a7e1a3e16d1b3b3f7a337",
+//   "617a7e1a3e16d1b3b3f7a338",
+//   "617a7ea9e5e49a334e5d43d8",
+//   "617a7ea9e5e49a334e5d43d9",
+//   "617a7ea9e5e49a334e5d43da",
+//   "617a7ed063374fd9ac3bf5c2",
+//   "617a7ed063374fd9ac3bf5c3",
+//   "617a7ed063374fd9ac3bf5c4",
+//   "617b9b53cfb39f066a6accee",
+// ];
+// Fruit.deleteMany({ _id: { $in: _ids } }, function (err) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Successfully deleted the document");
+//   }
+// });
 
 // Fruit.updateOne(
 //   { _id: "617b9bb756bedcba4f7e12a6" },
