@@ -1,33 +1,74 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
 // or as an es module:
 // import { MongoClient } from 'mongodb'
+mongoose.connect("mongodb://localhost:27017/fruitsDB", {
+  useNewUrlParser: true,
+});
 
-// Connection URL
-const url = "mongodb://localhost:27017";
-const client = new MongoClient(url);
+const fruitSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    min: 1,
+    max: 10,
+  },
+  review: String,
+});
 
-async function main() {
-  // Use connect method to connect to the server
-  await client.connect();
-  console.log("Connected successfully to server");
-  const db = client.db("fruitsDB");
-  const collection = db.collection("fruits");
+const Fruit = mongoose.model("Fruit", fruitSchema);
+const fruit = new Fruit({
+  rating: 10,
+  review: "Pretty solid as a fruit.",
+});
 
-  //   const insertResult = await collection.insertMany([
-  //     { name: "Apple", score: 8, review: "Great fruit" },
-  //     { name: "Orange", score: 6, review: "Kinda sour" },
-  //     { name: "Banana", score: 89, review: "Great " },
-  //   ]);
-  //   console.log("Inserted documents =>", insertResult);
+// fruit.save();
 
-  const findResult = await collection.find({}).toArray();
-  console.log("Found documents =>", findResult);
-  // the following code examples can be pasted here...
+Fruit.find(function (err, fruits) {
+  if (err) {
+    console.log(err);
+  } else {
+    // for (let i = 0; i < fruits.length; i++) {
+    //   console.log(fruits[i].name);
+    // }
+    fruits.forEach(function (fruit) {
+      console.log(fruit.name);
+    });
+    mongoose.connection.close();
+    console.log(fruits.length);
+  }
+});
 
-  return "done.";
-}
+Fruit.deleteMany({ name: "Karan" }, function (err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Successfully deleted the document");
+  }
+});
 
-main()
-  .then(console.log)
-  .catch(console.error)
-  .finally(() => client.close());
+// Fruit.updateOne(
+//   { _id: "617b9bb756bedcba4f7e12a6" },
+//   { name: "Peach" },
+//   function (err) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Successfuly updated the document");
+//     }
+//   }
+// );
+
+// const personSchema = new mongoose.Schema({
+//   name: String,
+//   age: Number,
+// });
+
+// const Person = mongoose.model("Person", personSchema);
+
+// const person = new Person({
+//   name: "John",
+//   age: 37,
+// });
