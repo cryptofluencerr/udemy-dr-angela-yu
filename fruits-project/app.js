@@ -35,12 +35,34 @@ Fruit.find(function (err, fruits) {
     //   console.log(fruits[i].name);
     // }
     fruits.forEach(function (fruit) {
-      console.log(fruit.name);
+      console.log(fruit);
     });
     mongoose.connection.close();
     console.log(fruits.length);
   }
 });
+
+// Fruit.updateOne(
+//   { _id: "617b9bb756bedcba4f7e12a6" },
+//   { name: "Peach" },
+//   (err) => {
+//     if (err) {
+//       console.log(err);
+//     }
+//     else{
+//       console.log("Updated succeddfully")
+//     }
+//   }
+// );
+
+// Fruit.deleteOne({ name: "Peach" }, (err) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Deleted successfully");
+//   }
+// });
+
 // _ids = [
 //   "617a7e1a3e16d1b3b3f7a337",
 //   "617a7e1a3e16d1b3b3f7a338",
