@@ -28,7 +28,7 @@ const workItems = [];
 app.get("/", function (req, res) {
   // Mongoose method to add items
   Item.find((err, docs) => {
-    console.log(docs);
+    // console.log(docs);
     if (docs.length === 0) {
       Item.insertMany(defaultItems, (err) => {
         if (err) {
@@ -39,7 +39,7 @@ app.get("/", function (req, res) {
       });
     } else {
       res.render("list", {
-        newListItems: defaultItems,
+        newListItems: docs,
         listTitle: "Todo List",
       });
     }
@@ -48,11 +48,15 @@ app.get("/", function (req, res) {
 
 app.post("/", function (req, res) {
   const itemName = req.body.newItem;
-  const item = new Item({
-    name: itemName,
-  });
-  item.save();
-  res.redirect("/");
+  if (itemName === "") {
+    window.alert("Donot leave the space blank");
+  } else {
+    const item = new Item({
+      name: itemName,
+    });
+    item.save();
+    res.redirect("/");
+  }
 });
 
 app.get("/work", function (req, res) {
