@@ -2,6 +2,7 @@ const express = require("express");
 const https = require("https");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
+const req = require("express/lib/request");
 
 app = express();
 app.set("view engine", "ejs");
@@ -19,38 +20,54 @@ const articleSchema = {
 };
 const Article = mongoose.model("Article", articleSchema);
 
-app.get("/articles", function (req, res) {
-  Article.find(function (err, foundArticles) {
-    if (!err) {
-      res.send(foundArticles);
-    } else {
-      res.send(err);
-    }
+//////////////////////////////////////////Requests Targeting all Articles//////////////
+app
+  .route("/articles")
+  .get((req, res) => {
+    Article.find(function (err, foundArticles) {
+      if (!err) {
+        res.send(foundArticles);
+      } else {
+        res.send(err);
+      }
+    });
+  })
+  .post((req, res) => {
+    const newArticle = new Article({
+      title: req.body.title,
+      content: req.body.content,
+    });
+    newArticle.save(function (err) {
+      if (!err) {
+        res.send("Successfully added a new article");
+      } else {
+        console.log(err);
+      }
+    });
+  })
+  .delete((req, res) => {
+    Article.deleteMany(function (err) {
+      if (!err) {
+        res.send("Successfully deleted the articles.");
+      } else {
+        res.send(err);
+      }
+    });
   });
-});
 
-app.post("/articles", (req, res) => {
-  const newArticle = new Article({
-    title: req.body.title,
-    content: req.body.content,
-  });
-  newArticle.save(function (err) {
-    if (!err) {
-      res.send("Successfully added a new article");
-    } else {
-      console.log(err);
-    }
-  });
-});
+///////////////////////////Requests Targeting A Specific Article//////////////
 
-app.delete("/articles", (req, res) => {
-  Article.deleteMany(function (err) {
-    if (!err) {
-      res.send("Successfully selected the articles.");
-    } else {
-      res.send(err);
+app.route("/articles/:articleTitle").get((req, res) => {
+  Article.findOne(
+    { title: req.params.articleTitle },
+    function (err, foundArticle) {
+      if (foundArticle) {
+        res.send(foundArticle.content);
+      } else {
+        res.send("No articles matching that title was found");
+      }
     }
-  });
+  );
 });
 
 app.listen(3000, () => {
