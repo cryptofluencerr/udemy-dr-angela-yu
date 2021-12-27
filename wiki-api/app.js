@@ -57,18 +57,50 @@ app
 
 ///////////////////////////Requests Targeting A Specific Article//////////////
 
-app.route("/articles/:articleTitle").get((req, res) => {
-  Article.findOne(
-    { title: req.params.articleTitle },
-    function (err, foundArticle) {
-      if (foundArticle) {
-        res.send(foundArticle.content);
-      } else {
-        res.send("No articles matching that title was found");
+app
+  .route("/articles/:articleTitle")
+  .get((req, res) => {
+    Article.findOne(
+      { title: req.params.articleTitle },
+      function (err, foundArticle) {
+        if (foundArticle) {
+          res.send(foundArticle.content);
+        } else {
+          res.send("No articles matching that title was found");
+        }
       }
-    }
-  );
-});
+    );
+  })
+  .put((req, res) => {
+    Article.updateOne(
+      { title: req.params.articleTitle },
+      { title: req.body.title, content: req.body.content },
+      { upsert: true },
+      (err) => {
+        if (!err) {
+          res.send("Successfully updated article.");
+        }
+      }
+    );
+  })
+  .patch((req, res) => {
+    Article.updateOne(
+      { title: req.params.articleTitle },
+      { $set: req.body },
+      (err) => {
+        if (!err) {
+          res.send("Successfully updated the article.");
+        }
+      }
+    );
+  })
+  .delete((req, res) => {
+    Article.deleteOne({ title: req.params.articleTitle }, (err) => {
+      if (!err) {
+        res.send("Successfully deleted the article.");
+      }
+    });
+  });
 
 app.listen(3000, () => {
   console.log("Port is running on 3000");
