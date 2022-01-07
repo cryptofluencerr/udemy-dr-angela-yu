@@ -35,7 +35,7 @@ app.post("/", (req, res) => {
     method: "post",
 
     // Generate an API key and put it here
-    auth: "karan1:2bd33e141f1251f3a40a2c4fab02f468-us5",
+    auth: "karan1:a206a35730efdc759c501c8305739b7f-us5",
   };
 
   const request = https.request(url, options, (response) => {
@@ -49,7 +49,7 @@ app.post("/", (req, res) => {
       const errorCount = JSON.parse(data).error_count;
       if (errorCount === 0) {
         res.sendFile(__dirname + "/success.html");
-      } else{
+      } else {
         res.sendFile(__dirname + "/failure.html");
       }
     });
@@ -63,7 +63,7 @@ app.post("/", (req, res) => {
   // <p>Email: ${email}</p>`);
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Port is running on 3000");
 });
 
@@ -71,5 +71,5 @@ app.post("/failure", (req, res) => {
   res.redirect("/");
 });
 
-// Mailchimp unique id- 021abbb9c0
-// api key- 2bd33e141f1251f3a40a2c4fab02f468-us5
+// Mailchimp unique id-  021abbb9c0
+// api key- a206a35730efdc759c501c8305739b7f-us5
